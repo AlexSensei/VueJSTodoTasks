@@ -16,7 +16,7 @@
 
 <script>
 import { users } from '../services/user.js';
-import { EventBus } from '../event-bus.js';
+
 export default {
   name: 'Login',
   props: {
@@ -32,7 +32,6 @@ export default {
     login: function() {
       users.login(this.email, this.password);
       if (localStorage.getItem('token') != null) {
-        EventBus.$emit('i-got-clicked', true);
         this.$router.push('/tasks');
       }
     }

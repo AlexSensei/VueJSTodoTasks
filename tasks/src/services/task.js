@@ -1,29 +1,31 @@
-import axios from 'axios';
+import axios from "axios";
 
 export default class Task {
-    constructor () {
-        axios.defaults.baseURL = 'http://myapp.test/';
-    }
+  constructor() {
+    axios.defaults.baseURL = "http://myapp.test/";
+  }
 
-    getAll (status) {
-        return axios.get(`tasks/${status}`);
-    }
+  getAll() {
+    return axios.get('tasks');
+  }
 
-    get (id) {
-        return axios.get('tasks', id);
-    }
-    
-    add (task) {
-        return axios.post('tasks', task);
-    }
+  get(id) {
+    return axios.get(`tasks/${id}`);
+  }
 
-    delete (id) {
-        return axios.delete(`tasks/${id}`);
-    }
+  add(task) {
+    return axios.post("tasks", task, {
+      "Content-Type": "application/json"
+    });
+  }
 
-    update (id, task) {
-        return axios.put(`tasks/update/${id}`, task)
-    }
+  delete(id) {
+    return axios.delete(`tasks/${id}`);
+  }
+
+  update(task) {
+    return axios.put(`tasks/${task.id}`, task);
+  }
 }
 
 export const tasks = new Task();

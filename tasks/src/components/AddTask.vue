@@ -13,23 +13,24 @@
 </template>
 
 <script>
-
 import { tasks } from '../services/task.js';
 export default {
   name: 'AddTask',
   data() {
-      return {
-          name:'',
-          content:'',
-      }
+    return {
+      name: '',
+      content: ''
+    };
   },
   methods: {
-      addTask: function() {
-       tasks.addTask({
-              name: this.name,
-              content: this.content,
-          });
-      }
+    addTask: function() {
+      tasks
+        .add({
+          name: this.name,
+          content: this.content
+        })
+        .then(response => this.$router.push('/tasks'));
+    }
   }
-}
+};
 </script>

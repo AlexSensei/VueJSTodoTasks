@@ -16,20 +16,22 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
 import Register from './components/Register.vue';
 import Login from './components/Login.vue';
 import SideBar from './components/SideBar.vue';
 import AddTask from './components/AddTask.vue';
+import TasksList from './components/TasksList.vue';
+import EditTask from './components/EditTask.vue';
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld,
     Register,
     Login,
     SideBar,
-    AddTask
+    AddTask,
+    TasksList,
+    EditTask
   }
 }
 </script>
