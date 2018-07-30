@@ -2,7 +2,7 @@
   <div class="container-fluid text-center">    
     <div class="row content">
       <div class="col-sm-2 sidenav">
-      <router-link :to="{ name: 'home' }" class="btn btn-primary">Home</router-link>
+        <router-link :to="{ name: 'home' }" class="btn btn-primary">Home</router-link>
       </div>
       <div class="col-sm-8 text-left"> 
         <router-view></router-view>

@@ -25,36 +25,37 @@
 </template>
 
 <script>
-
 import { users } from '../services/user.js';
 export default {
   name: 'Register',
   props: {
     msg: String
   },
-  data () {
-      return {
-          name: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
-          validPassword: '',
-      }
+  data() {
+    return {
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      validPassword: ''
+    };
   },
   watch: {
-      confirmPassword(oldValue) {
-        if(oldValue != this.password)
-            this.validPassword='Passwords dont match!';
-        else
-            this.validPassword='';
-      }
+    confirmPassword(oldValue) {
+      if (oldValue != this.password)
+        this.validPassword = 'Passwords dont match!';
+      else this.validPassword = '';
+    }
   },
   methods: {
-      registerUser: function(){
-          users.register(this.name, this.email, this.password);
+    registerUser: function() {
+      users.register(this.name, this.email, this.password);
+      if (localStorage.getItem('token') != null) {
+        this.$router.push('/tasks');
       }
+    }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

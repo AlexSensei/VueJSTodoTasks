@@ -15,35 +15,32 @@
 </template>
 
 <script>
-
-import axios from 'axios';
-
+import { users } from '../services/user.js';
+import { EventBus } from '../event-bus.js';
 export default {
   name: 'Login',
   props: {
     msg: String
   },
-  data () {
-      return {
-          email: '',
-          password: '',
-      }
+  data() {
+    return {
+      email: '',
+      password: ''
+    };
   },
   methods: {
-      login: function(){
-          axios.post('http://myapp.test/api/auth/login', {
-              email: this.email,
-              password: this.password,
-          },
-          {
-              'Content-Type':'application/json'
-          });
+    login: function() {
+      users.login(this.email, this.password);
+      if (localStorage.getItem('token') != null) {
+        EventBus.$emit('i-got-clicked', true);
+        this.$router.push('/tasks');
       }
+    }
   }
-}
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
 h3 {
   margin: 40px 0 0;
