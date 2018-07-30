@@ -3,24 +3,32 @@
       Register user
       <br>
       Name
+      <br>
       <input type="text" v-model="name">
+      <br>
       Email
+      <br>
       <input type="text" v-model="email">
+      <br>
       Password
+      <br>
       <input type="password" v-model="password">
+      <br>
       Confirm password
+      <br>
       <input type="password" v-model="confirmPassword">
+      <br>
       <p> {{ validPassword }} </p>
-      <button v-on:click="register">Submit</button>
+      <br>
+      <button v-on:click="registerUser">Submit</button>
   </div>
 </template>
 
 <script>
 
-import axios from 'axios';
-
+import { users } from '../services/user.js';
 export default {
-  name: 'HelloWorld',
+  name: 'Register',
   props: {
     msg: String
   },
@@ -42,15 +50,8 @@ export default {
       }
   },
   methods: {
-      register: function(){
-          axios.post('http://myapp.test/api/auth/register', {
-              name: this.name,
-              email: this.email,
-              password: this.password,
-          },
-          {
-              'Content-Type':'application/json'
-          });
+      registerUser: function(){
+          users.register(this.name, this.email, this.password);
       }
   }
 }
