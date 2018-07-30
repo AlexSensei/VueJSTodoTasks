@@ -2,6 +2,16 @@
     <div>
         <router-link :to="{ name: 'addTask' }" class="btn btn-primary">Add Task</router-link>
         <br>
+        High Priority Tasks
+        <div v-for="task in priorityTasksList" :key="task.id">
+            <div class="well" id="taskBody">
+                <h5>{{ task.name }}</h5>
+                <p>{{ task.content }}</p>
+                <router-link :to="{ name: 'edit', params: { task: task } }" class="btn btn-default">Edit</router-link>
+                <button class="btn btn-danger" v-on:click="deleteTask(task)" >Delete</button>
+            </div>
+        </div>
+         <br>
         My Tasks
         <div v-for="task in tasksList" :key="task.id">
             <div class="well" id="taskBody">
@@ -9,6 +19,13 @@
                 <p>{{ task.content }}</p>
                 <router-link :to="{ name: 'edit', params: { task: task } }" class="btn btn-default">Edit</router-link>
                 <button class="btn btn-danger" v-on:click="deleteTask(task)" >Delete</button>
+            </div>
+        </div>
+        Completed Tasks
+        <div v-for="task in completedTasksList" :key="task.id">
+            <div class="well" id="taskBody">
+                <h5>{{ task.name }}</h5>
+                <p>{{ task.content }}</p>
             </div>
         </div>
     </div>
@@ -21,7 +38,9 @@ export default {
   name: 'tasksList',
   data() {
     return {
-      tasksList: []
+      tasksList: [],
+      priorityTasksList: [],
+      completedTasksList: [],
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -29,6 +48,10 @@ export default {
       tasks.getAll().then(response => {
         next(vm => {
           vm.tasksList = response.data;
+          vm.completedTasksList = vm.tasksList.filter(el => el.is_done == true );
+          vm.tasksList = vm.tasksList.filter(el => el.is_done != true );
+          vm.priorityTasksList = vm.tasksList.filter(el => el.priority == true );
+          vm.tasksList = vm.tasksList.filter(el => el.priority != true );
         });
       });
     } else {
@@ -36,6 +59,7 @@ export default {
         vm.$router.push('login');
       });
     }
+    
   },
   methods: {
     deleteTask(task) {

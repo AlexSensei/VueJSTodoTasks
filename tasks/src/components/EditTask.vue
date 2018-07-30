@@ -32,8 +32,7 @@ export default {
   created() {
     this.$route.params.task &&
       tasks.get(this.$route.params.task.id).then(response => {
-        console.log(response.data[0]);
-        this.task = response.data[0];
+        this.task = response.data;
       });
   },
   methods: {
