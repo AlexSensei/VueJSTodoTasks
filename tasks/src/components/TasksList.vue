@@ -5,26 +5,26 @@
         High Priority Tasks
         <div v-for="task in priorityTasksList" :key="task.id">
             <div class="well" id="taskBody">
-                <h5>{{ task.name }}</h5>
+                <h3>{{ task.name }}</h3>
                 <p>{{ task.content }}</p>
-                <router-link :to="{ name: 'edit', params: { task: task } }" class="btn btn-default">Edit</router-link>
-                <button class="btn btn-danger" v-on:click="deleteTask(task)" >Delete</button>
+                <router-link :to="{ name: 'edit', params: { task: task } }" class="btn btn-warning">Edit</router-link>
+                <button class="btn btn-danger" v-on:click="deletePriorityTask(task)" >Delete</button>
             </div>
         </div>
          <br>
         My Tasks
         <div v-for="task in tasksList" :key="task.id">
             <div class="well" id="taskBody">
-                <h5>{{ task.name }}</h5>
+                <h3>{{ task.name }}</h3>
                 <p>{{ task.content }}</p>
-                <router-link :to="{ name: 'edit', params: { task: task } }" class="btn btn-default">Edit</router-link>
+                <router-link :to="{ name: 'edit', params: { task: task } }" class="btn btn-warning">Edit</router-link>
                 <button class="btn btn-danger" v-on:click="deleteTask(task)" >Delete</button>
             </div>
         </div>
         Completed Tasks
         <div v-for="task in completedTasksList" :key="task.id">
             <div class="well" id="taskBody">
-                <h5>{{ task.name }}</h5>
+                <h3>{{ task.name }}</h3>
                 <p>{{ task.content }}</p>
             </div>
         </div>
@@ -65,6 +65,10 @@ export default {
     deleteTask(task) {
       tasks.delete(task.id);
       this.tasksList = this.tasksList.filter(el => el.id !== task.id);
+    },
+    deletePriorityTask(task) {
+      tasks.delete(task.id);
+      this.priorityTasksList = this.priorityTasksList.filter(el => el.id !== task.id);
     }
   }
 };
