@@ -41,24 +41,18 @@ export default {
   data() {
     return {
       tasks: [],
-      //priorityTasks: [],
-      //completedTasks: [],
     };
   },
   computed: {
     completedTasks () { return this.tasks.filter(el => el.is_done); },
     priorityTasks () { return this.tasks.filter(el => { return !el.is_done && el.priority }); },
-    pendingTasks () { return this.tasks.filter(el => { return !el.is_done && !el.priority }); },  // Pozvace se opet tek tak se tasks niz promeni`
+    pendingTasks () { return this.tasks.filter(el => { return !el.is_done && !el.priority }); },
   },
   beforeRouteEnter(to, from, next) {
     if (users.isLoggedIn()) {
       tasks.getAll().then(response => {
         next(vm => {
           vm.tasks = response.data;
-          //vm.completedTasks = vm.tasks.filter(el => el.is_done);
-          //vm.tasks = vm.tasks.filter(el => el.is_done != true );
-          //vm.priorityTasks = vm.tasks.filter(el => el.priority);
-          //vm.tasks = vm.tasks.filter(el => el.priority != true );
         });
       });
     } else {
