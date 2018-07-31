@@ -10,7 +10,7 @@
       <br>
       <input type="password" v-model="password">
       <br>
-      <button v-on:click="login">Login</button>
+      <button @click="login">Login</button>
   </div>
 </template>
 
@@ -29,10 +29,10 @@ export default {
     };
   },
   methods: {
-    login: function() {
+    login () {
       users.login(this.email, this.password);
-      if (localStorage.getItem('token') != null) {
-        this.$router.push('/tasks');
+      if (users.isLoggedIn()) {
+        this.$router.push({name: 'tasks'});
       }
     }
   }

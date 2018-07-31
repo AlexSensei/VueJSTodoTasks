@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
-export default class Task {
+export default class TaskService {
   constructor() {
-    axios.defaults.baseURL = "http://myapp.test/";
+    axios.defaults.baseURL = 'http://myapp.test/';
   }
 
   getAll() {
@@ -14,9 +14,7 @@ export default class Task {
   }
 
   add(task) {
-    return axios.post("tasks", task, {
-      "Content-Type": "application/json"
-    });
+    return axios.post('tasks', task);
   }
 
   delete(id) {
@@ -28,4 +26,4 @@ export default class Task {
   }
 }
 
-export const tasks = new Task();
+export const tasks = new TaskService();

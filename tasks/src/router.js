@@ -4,7 +4,6 @@ import VueRouter from 'vue-router';
 import Login from './components/Login.vue';
 import Register from './components/Register.vue';
 import AddTask from './components/AddTask.vue';
-import EditTask from './components/EditTask.vue';
 import TasksList from './components/TasksList.vue';
 
 
@@ -15,8 +14,7 @@ const routes = [
   { path: '/login', component: Login, name: 'login' },
   { path: '/register', component: Register, name: 'register' },
   { path: '/taskCreate', component: AddTask, name: 'addTask' },
-  { path: '/tasks', component: TasksList, name: 'tasksList' },
-  { path: '/edit', component: EditTask, name: 'edit' }
+  { path: '/tasks', component: TasksList, name: 'tasks' },
 ];
 
 export const router = new VueRouter({

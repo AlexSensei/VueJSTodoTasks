@@ -9,28 +9,31 @@
       
     </div>
     <div v-if="showInfo">
-      <button class="btn btn-primary" v-on:click="logout">Logout</button>
+      <button class="btn btn-primary" @click="logout">Logout</button>
     </div>
   </div>
 </template>
 
 <script>
+import { users } from '../services/user.js';
+
 export default {
   name: 'side-app',
   data() {
     return {
-      showInfo: Boolean
+      showInfo: false
     };
   },
   methods: {
-    logout: function() {
-      localStorage.removeItem('token');
-      this.$router.push('login');
+    logout () {
+      users.logout();
+      this.$router.push({name: 'login'});
       this.showInfo = false;
     }
   },
   beforeRouteEnter(to, from, next) {
-    if (localStorage.getItem('token') != null) next(vm => (vm.showInfo = true));
+    if(users.isLoggedIn())
+      next(vm => (vm.showInfo = true));
     else next(vm => (vm.showInfo = false));
   }
 };

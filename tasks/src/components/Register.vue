@@ -18,9 +18,9 @@
       <br>
       <input type="password" v-model="confirmPassword">
       <br>
-      <p> {{ validPassword }} </p>
+      <p v-if="validPassword"> Passwords dont match! </p>
       <br>
-      <button v-on:click="registerUser">Submit</button>
+      <button @click="registerUser">Submit</button>
   </div>
 </template>
 
@@ -43,15 +43,15 @@ export default {
   watch: {
     confirmPassword(oldValue) {
       if (oldValue != this.password)
-        this.validPassword = 'Passwords dont match!';
-      else this.validPassword = '';
+        this.validPassword = true;
+      else this.validPassword = false;
     }
   },
   methods: {
-    registerUser: function() {
+    registerUser () {
       users.register(this.name, this.email, this.password);
-      if (localStorage.getItem('token') != null) {
-        this.$router.push('/tasks');
+      if (users.isLoggedIn()) {
+        this.$router.push({name: 'tasks'});
       }
     }
   }
